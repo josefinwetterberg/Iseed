@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('seed_when_to_harvest', function (Blueprint $table) {
+        Schema::create('seed_season', function (Blueprint $table) {
             $table->foreignId('seed_id')->constrained()->onDelete('cascade');
-            $table->foreignId('when_to_harvest_id')->constrained()->onDelete('cascade');
+            $table->foreignId('season_id')->constrained()->onDelete('cascade');
+            $table->string('action');
             $table->timestamps();
-            $table->primary(['seed_id', 'when_to_harvest_id']);
+            $table->unique(['seed_id', 'season_id', 'action']);
         });
     }
 
@@ -24,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('harvest', function (Blueprint $table) {
-            //
-        });
+        //
     }
 };
