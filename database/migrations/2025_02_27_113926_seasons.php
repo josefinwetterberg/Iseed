@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('seed_when_to_sow', function (Blueprint $table) {
-            $table->foreignId('seed_id')->constrained()->onDelete('cascade');
-            $table->foreignId('when_to_sow_id')->constrained()->onDelete('cascade');
+        Schema::create('seasons', function (Blueprint $table) {
+            $table->id();
+            $table->string('months');
             $table->timestamps();
-            $table->primary(['seed_id', 'when_to_sow_id']);
         });
     }
 
@@ -24,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('sow', function (Blueprint $table) {
-            //
-        });
+        //
     }
 };
