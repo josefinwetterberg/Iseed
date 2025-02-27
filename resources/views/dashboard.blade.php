@@ -8,5 +8,10 @@
 <body>
     <h2>Welcome to the Dashboard</h2>
     <p>This is the admin area where you manage products.</p>
+
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
 </body>
 </html>
