@@ -10,6 +10,7 @@
     <h1>Welcome to the Dashboard</h1>
     <p>This is the admin area where you manage products.</p>
 
+
     <h2>Add new products</h2>
     <form action="/seeds" method="POST">
     @csrf
@@ -67,5 +68,11 @@
     </div>
     <button  class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Create task</button>
 </form> --}}
+
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
+
 </body>
 </html>
