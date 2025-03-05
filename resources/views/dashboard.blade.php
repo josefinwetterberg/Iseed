@@ -57,8 +57,8 @@
                         <input type="number" name="seed_count" id="seed_count">
                     </div>
                     <div>
-                        <label for="ecological">Ecological</label>
-                        <select name="ecological" id="ecological">
+                        <label for="organic">Organic</label>
+                        <select name="organic" id="organic">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
