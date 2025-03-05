@@ -1,49 +1,24 @@
 <?php
 
+
 use App\Http\Controllers\SeedController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-//Route to dashboard
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware('auth')->name('dashboard');
-
-//Route to login
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-
-
-//Post request to login
-Route::post('/login', function (Request $request) {
-    $credentials = $request->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-    ]);
-
-    // Attempt to log in the user
-    if (Auth::attempt($credentials)) {
-        return redirect('/dashboard');
-    }
-
-    // If login fails, send back with error message
-    return back()->withErrors([
-        'email' => 'Invalid email or password.',
-    ]);
-})->name('login');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::post('/seeds', SeedController::class)->middleware('auth');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-
-//Route to logout
-Route::post('/logout', function () {
-    Auth::logout();
-    return redirect('/');
-})->name('logout');
+require __DIR__.'/auth.php';
