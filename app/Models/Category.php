@@ -16,4 +16,10 @@ class Category extends Model
     {
         return $this->hasMany(Seed::class);
     }
+
+    //tror det ska vara belongsToMany?
+    public function seeds()
+    {
+        return $this->belongsToMany(Seed::class);
+    }
 }

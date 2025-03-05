@@ -48,7 +48,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function seed(): HasMany
+    public function seeds(): HasMany
     {
         return $this->hasMany(Seed::class);
     }
