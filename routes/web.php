@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SeedController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -36,6 +37,9 @@ Route::post('/login', function (Request $request) {
         'email' => 'Invalid email or password.',
     ]);
 })->name('login');
+
+Route::post('/seeds', SeedController::class)->middleware('auth');
+
 
 
 //Route to logout

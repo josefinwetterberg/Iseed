@@ -19,9 +19,11 @@ return new class extends Migration
             $table->integer('height_cm');
             $table->string('color');
             $table->string('image');
-            $table->integer('price_sek');
+            $table->integer('price_sek')->default(30);
             $table->integer('seed_count');
-            $table->boolean('ecolgical');
+            $table->boolean('ecological');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ class Seed extends Model
         'image',
         'price_sek',
         'seed_count',
-        'ecolgical'
+        'ecological',
+        'user_id'
     ];
 }
