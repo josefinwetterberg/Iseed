@@ -1,5 +1,5 @@
 @if ($errors->any())
-<p>
-    <u>{{ $errors->first() }}</u>
-</p>
+    <div class="error-message">
+        {{ $errors->first() }}
+    </div>
 @endif

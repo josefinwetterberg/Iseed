@@ -9,7 +9,7 @@
     <body>
         <header>
             @if (Route::has('login'))
-                <nav>
+                <nav class="welcome-nav">
                     @auth
                         <a href="{{ url('/dashboard') }}" class="nav-link">Dashboard</a>
                     @else
@@ -23,7 +23,7 @@
             @endif
         </header>
 
-        <main>
+        <main class="welcome-main">
             <div class="logo">
                 <h1>Laravel</h1>
             </div>
