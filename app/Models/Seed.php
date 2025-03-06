@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Seed extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'name',
         'description',
@@ -26,7 +29,7 @@ class Seed extends Model
 
     public function categories()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsToMany(Category::class, 'seed_category');
     }
 
     //För att en seed ska kunna ha flera whereToSow
@@ -37,6 +40,6 @@ class Seed extends Model
 
     public function seasons()
     {
-        return $this->belongsToMany(Season::class)->withPivot('action');
+        return $this->belongsToMany(Season::class, 'seed_season')->withPivot('action');
     }
 }

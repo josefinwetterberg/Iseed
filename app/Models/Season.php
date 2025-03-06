@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Season extends Model
 {
+    use HasFactory;
+
     //Osäker på vad som ska vara här på fillable. Ska det vara name?
     protected $fillable = [
         'name'
@@ -13,6 +16,6 @@ class Season extends Model
 
     public function seeds()
     {
-        return $this->belongsToMany(Seed::class)->withPivot('action');
+        return $this->belongsToMany(Seed::class, 'seed_season')->withPivot('action');
     }
 }
