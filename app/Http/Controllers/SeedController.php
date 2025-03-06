@@ -23,7 +23,7 @@ class SeedController extends Controller
             'image' => 'required|url',
             'price_sek' => 'required|integer',
             'seed_count' => 'required|integer',
-            'ecological' => 'required|boolean',
+            'organic' => 'required|boolean',
         ]);
 
         $seed = new Seed();
@@ -35,7 +35,7 @@ class SeedController extends Controller
         $seed->image = $request->get('image');
         $seed->price_sek = $request->get('price_sek');
         $seed->seed_count = $request->get('seed_count');
-        $seed->ecological = $request->get('ecological');
+        $seed->organic = $request->get('organic');
         $seed->user_id = Auth::id();
         $seed->save();
         return redirect('/dashboard');
