@@ -70,5 +70,37 @@
             @csrf
             <button type="submit">Logout</button>
         </form>
+
+        <h2>Existing Products</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Annuality</th>
+                    <th>Height (cm)</th>
+                    <th>Color</th>
+                    <th>Image</th>
+                    <th>Price (SEK)</th>
+                    <th>Seed Count</th>
+                    <th>Organic</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($seeds as $seed)
+                <tr>
+                    <td>{{ $seed->name }}</td>
+                    <td>{{ $seed->description }}</td>
+                    <td>{{ $seed->annuality }}</td>
+                    <td>{{ $seed->height_cm }}</td>
+                    <td>{{ $seed->color }}</td>
+                    <td><img src="{{ $seed->image }}" alt="{{ $seed->name }}" width="50"></td>
+                    <td>{{ $seed->price_sek }}</td>
+                    <td>{{ $seed->seed_count }}</td>
+                    <td>{{ $seed->organic ? 'Yes' : 'No' }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </body>
 </x-app-layout>
