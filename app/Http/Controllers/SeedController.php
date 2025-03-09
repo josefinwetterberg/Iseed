@@ -22,7 +22,8 @@ class SeedController extends Controller
      */
     public function create()
     {
-        //
+        //För att ha en create view för att skapa en ny seed.
+        return view('seeds.create');
     }
 
     /**
@@ -61,11 +62,11 @@ class SeedController extends Controller
     /**
      * Display the specified resource.
      */
-    //Behöver skapa en seed.show view för att visa en specifik seed. Kanske inte är nödvändigt?
-    // public function show(Seed $seed)
-    // {
-    //     return view('seeds.show', ['seed' => $seed]);
-    // }
+    public function show(Seed $seed)
+    {
+        //Behöver skapa en seed.show view för att visa en specifik seed. Kanske inte är nödvändigt för oss?
+        return view('seeds.show', ['seed' => $seed]);
+    }
 
     /**
      * Show the form for editing the specified resource.

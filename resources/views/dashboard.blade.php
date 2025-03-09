@@ -65,6 +65,8 @@
             <button type="submit">Add new product</button>
         </form>
 
+        <a href="{{ route('seeds.create') }}" class="btn btn-primary">Add New Seed</a>
+
         <form action="{{ route('logout') }}" method="POST">
             @csrf
             <button type="submit">Logout</button>
