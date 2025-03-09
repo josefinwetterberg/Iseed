@@ -85,8 +85,9 @@ class SeedController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Seed $seed)
     {
-        //
+        $seed->delete();
+        return redirect('/dashboard')->with('success', 'Seed deleted successfully!');
     }
 }

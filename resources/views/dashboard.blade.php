@@ -98,6 +98,13 @@
                     <td>{{ $seed->price_sek }}</td>
                     <td>{{ $seed->seed_count }}</td>
                     <td>{{ $seed->organic ? 'Yes' : 'No' }}</td>
+                    <td>
+                    <form action="{{ route('seeds.destroy', $seed) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
