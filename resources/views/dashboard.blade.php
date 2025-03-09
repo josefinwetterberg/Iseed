@@ -98,6 +98,7 @@
                     <td>{{ $seed->price_sek }}</td>
                     <td>{{ $seed->seed_count }}</td>
                     <td>{{ $seed->organic ? 'Yes' : 'No' }}</td>
+                    <td><a href="{{ route('seeds.edit', $seed->id) }}">Edit</a> {{-- Add Edit Button --}}</td>
                     <td>
                     <form action="{{ route('seeds.destroy', $seed) }}" method="POST">
                         @csrf
