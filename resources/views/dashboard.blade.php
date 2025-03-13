@@ -65,6 +65,7 @@
             <button type="submit">Add new product</button>
         </form>
 
+        {{-- Borde denna ligga i en button? --}}
         <a href="{{ route('seeds.create') }}" class="btn btn-primary">Add New Seed</a>
 
         <form action="{{ route('logout') }}" method="POST">
