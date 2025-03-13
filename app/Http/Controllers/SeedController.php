@@ -22,7 +22,8 @@ class SeedController extends Controller
      */
     public function create()
     {
-        //
+        //För att ha en create view för att skapa en ny seed.
+        return view('seeds.create');
     }
 
     /**
@@ -61,32 +62,61 @@ class SeedController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Seed $seed)
     {
-        //
+        //Behöver skapa en seed.show view för att visa en specifik seed. Kanske inte är nödvändigt för oss?
+        return view('seeds.show', ['seed' => $seed]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    //This sends the specific seed’s data to the seeds.edit view.
+    //The view will use this data to pre-fill an edit form.
+    public function edit(Seed $seed)
     {
-        //
+        return view('seeds.edit', ['seed' => $seed]);
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Seed $seed)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string|min:10',
+            'annuality' => 'required|string',
+            'height_cm' => 'required|integer',
+            'color' => 'required|string',
+            'image' => 'required|url',
+            'price_sek' => 'required|integer',
+            'seed_count' => 'required|integer',
+            'organic' => 'required|boolean',
+        ]);
+
+        $seed->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'annuality' => $request->annuality,
+            'height_cm' => $request->height_cm,
+            'color' => $request->color,
+            'image' => $request->image,
+            'price_sek' => $request->price_sek,
+            'seed_count' => $request->seed_count,
+            'organic' => $request->organic,
+        ]);
+
+        return redirect('/dashboard')->with('success', 'Seed updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Seed $seed)
     {
-        //
+        $seed->delete();
+        return redirect('/dashboard')->with('success', 'Seed deleted successfully!');
     }
 }
