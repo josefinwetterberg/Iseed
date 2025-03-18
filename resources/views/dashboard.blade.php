@@ -17,8 +17,10 @@
 
 
 
-        {{-- Borde denna ligga i en button? --}}
-        <a href="{{ route('seeds.create') }}" class="btn btn-primary">Add New Seed</a>
+
+        <form action="{{ route('seeds.create') }}" method="GET" class="d-inline">
+            <button type="submit" class="btn btn-primary">Add New Seed</button>
+        </form>
 
         <form action="{{ route('logout') }}" method="POST">
             @csrf
