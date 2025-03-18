@@ -1,19 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+        <x-header title="Dashboard" />
     </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
-    </div>
 
     <x-slot name="slot">
 
@@ -29,8 +17,10 @@
 
 
 
-        {{-- Borde denna ligga i en button? --}}
-        <a href="{{ route('seeds.create') }}" class="btn btn-primary">Add New Seed</a>
+
+        <form action="{{ route('seeds.create') }}" method="GET" class="d-inline">
+            <button type="submit" class="btn btn-primary">Add New Seed</button>
+        </form>
 
         <form action="{{ route('logout') }}" method="POST">
             @csrf
