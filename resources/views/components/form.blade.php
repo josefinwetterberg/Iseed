@@ -81,71 +81,26 @@
                         <option value="0">No</option>
                     </select>
 
-                    <label for="category">Category</label>
-                    <input type="checkbox" name="category" id="category">
-                    <label for="category">Flowers</label>
-                    <input type="checkbox" name="category" id="category">
-                    <label for="category">Vegetables</label>
-                    <input type="checkbox" name="category" id="category">
-                    <label for="category">Herbs</label>
+                    <label>Category</label><br>
+                    <input type="checkbox" name="categories[]" value="flowers"> Flowers<br>
+                    <input type="checkbox" name="categories[]" value="vegetables"> Vegetables<br>
+                    <input type="checkbox" name="categories[]" value="herbs"> Herbs<br>
 
-                    <label for="where-to-sow">Where to sow</label>
-                    <input type="checkbox" name="sun" id="sun">
-                    <label for="where-to-sow">Sun</label>
-                    <input type="checkbox" name="shade" id="shade">
-                    <label for="where-to-sow">Shade</label>
+                    <label>Where to Sow</label><br>
+                    <input type="checkbox" name="where_to_sow[]" value="sun"> Sun<br>
+                    <input type="checkbox" name="where_to_sow[]" value="shade"> Shade<br>
                   
-                    <label for="when-to-sow">When to sow</label>
-                    <input type="checkbox" name="january" id="january">
-                    <label for="when-to-sow">January</label>
-                    <input type="checkbox" name="february" id="february">
-                    <label for="when-to-sow">February</label>
-                    <input type="checkbox" name="march" id="march">
-                    <label for="when-to-sow">March</label>
-                    <input type="checkbox" name="april" id="april">
-                    <label for="when-to-sow">April</label>
-                    <input type="checkbox" name="may" id="may">
-                    <label for="when-to-sow">May</label>
-                    <input type="checkbox" name="june" id="june">
-                    <label for="when-to-sow">June</label>
-                    <input type="checkbox" name="july" id="july">
-                    <label for="when-to-sow">July</label>
-                    <input type="checkbox" name="august" id="august">
-                    <label for="when-to-sow">August</label>
-                    <input type="checkbox" name="september" id="september">
-                    <label for="when-to-sow">September</label>
-                    <input type="checkbox" name="october" id="october">
-                    <label for="when-to-sow">October</label>
-                    <input type="checkbox" name="november" id="november">
-                    <label for="when-to-sow">November</label>
-                    <input type="checkbox" name="december" id="december">
-                    <label for="when-to-sow">December</label>
+                    <label>When to Sow</label><br>
+                    @foreach(['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'] as $month)
+                        <input type="checkbox" name="when_to_sow[]" value="{{ $month }}"> {{ ucfirst($month) }}<br>
+                    @endforeach
 
-                    <label for="when-to-harvest">When to harvest</label>
-                    <input type="checkbox" name="january" id="january">
-                    <label for="when-to-harvest">January</label>
-                    <input type="checkbox" name="february" id="february">
-                    <label for="when-to-harvest">February</label>
-                    <input type="checkbox" name="march" id="march">
-                    <label for="when-to-harvest">March</label>
-                    <input type="checkbox" name="april" id="april">
-                    <label for="when-to-harvest">April</label>
-                    <input type="checkbox" name="may" id="may">
-                    <label for="when-to-harvest">May</label>
-                    <input type="checkbox" name="june" id="june">
-                    <label for="when-to-harvest">June</label>
-                    <input type="checkbox" name="july" id="july">
-                    <label for="when-to-harvest">July</label>
-                    <input type="checkbox" name="august" id="august">
-                    <label for="when-to-harvest">August</label>
-                    <input type="checkbox" name="september" id="september">
-                    <label for="when-to-harvest">September</label>
-                    <input type="checkbox" name="october" id="october">
-                    <label for="when-to-harvest">October</label>
-                    <input type="checkbox" name="november" id="november">
-                    <label for="when-to-harvest">November</label>
-                    <input type="checkbox" name="december" id="december">
-                    <label for="when-to-harvest">December</label>
+
+                    <label>When to Harvest</label><br>
+                    @foreach(['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'] as $month)
+                        <input type="checkbox" name="when_to_harvest[]" value="{{ $month }}"> {{ ucfirst($month) }}<br>
+                    @endforeach
+
                     
 
                 <button type="submit">Add new product</button>
