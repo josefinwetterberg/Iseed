@@ -3,10 +3,11 @@
 <header class="header">
     <h1>{{ $title }}</h1>
     <nav>
-        <ul>
-            {{-- <li><a href="{{ route('home') }}">Home</a></li> --}}
-            <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
-            <li><a href="{{ route('logout') }}">Logout</a></li>
-        </ul>
+    
+                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit" style="border: none; background: none; color: inherit; cursor: pointer;">Logout</button>
+                </form>
+    
     </nav>
 </header>
