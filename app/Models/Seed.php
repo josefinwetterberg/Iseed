@@ -19,12 +19,7 @@ class Seed extends Model
         'price_sek',
         'seed_count',
         'organic',
-        'user_id',
-        'category',
-        'where_to_sow',
-        'when_to_sow',
-        'when_to_harvest'
-
+        'user_id'
     ];
 
     public function user()

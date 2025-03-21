@@ -15,10 +15,12 @@
         <h1>Welcome to the Dashboard</h1>
         <p>This is the admin area where you manage products.</p>
 
+
+
+
         <form action="{{ route('seeds.create') }}" method="GET" class="d-inline">
             <button type="submit" class="btn btn-primary">Add New Seed</button>
         </form>
-
 
         <form action="{{ route('logout') }}" method="POST">
             @csrf
