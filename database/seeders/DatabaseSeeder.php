@@ -27,8 +27,8 @@ class DatabaseSeeder extends Seeder
 
         // Skapa 10 kategorier, 5 såplatser och 4 säsonger
         Category::factory()->count(10)->create();
-        WhereToSow::factory()->count(5)->create();
-        Season::factory()->count(4)->create();
+        /*  WhereToSow::factory()->count(5)->create();
+        Season::factory()->count(4)->create(); */
 
         // Skapa 50 fröprodukter
         Seed::factory()->count(50)->create()->each(function ($seed) {
@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
                 Category::inRandomOrder()->take(rand(1, 3))->pluck('id')
             );
 
-            // Koppla fröet till slumpmässiga såplatser
+            /*       // Koppla fröet till slumpmässiga såplatser
             $seed->whereToSow()->attach(
                 WhereToSow::inRandomOrder()->take(rand(1, 2))->pluck('id')
             );
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
             $seed->seasons()->attach(
                 Season::inRandomOrder()->take(rand(1, 2))->pluck('id'),
                 ['action' => 'sow']
-            );
+            ); */
         });
     }
 }
