@@ -12,12 +12,71 @@ class SeedController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        $seeds = Seed::all();
+        $query = Seed::query();
+
+        // Filter by name
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+
+        // Filter by category
+        if ($request->filled('category_id')) {
+            $query->whereHas('categories', function ($q) use ($request) {
+                $q->where('categories.id', $request->category_id);
+            });
+        }
+
+        // Filter by color
+        if ($request->has('color') && is_array($request->color) && !empty($request->color)) {
+            $query->whereIn('color', $request->color);
+        }
+
+        // Filter by annuality
+        if ($request->filled('annuality')) {
+            $query->where('annuality', $request->annuality);
+        }
+
+        // Filter by height range
+        if ($request->filled('min_height')) {
+            $query->where('height_cm', '>=', $request->min_height);
+        }
+        if ($request->filled('max_height')) {
+            $query->where('height_cm', '<=', $request->max_height);
+        }
+
+        // Filter by price range
+        if ($request->filled('min_price')) {
+            $query->where('price_sek', '>=', $request->min_price);
+        }
+        if ($request->filled('max_price')) {
+            $query->where('price_sek', '<=', $request->max_price);
+        }
+
+        // Filter by organic status
+        if ($request->filled('organic')) {
+            $query->where('organic', $request->organic);
+        }
+
+        //Filter by seed count
+        if ($request->filled('min_seed_count')) {
+            $query->where('seed_count', '>=', $request->min_seed_count);
+        }
+        if ($request->filled('max_seed_count')) {
+            $query->where('seed_count', '<=', $request->max_seed_count);
+        }
+
+        // Execute the query
+        $seeds = $query->get();
+
+        $colors = Seed::select('color')->distinct()->pluck('color')->toArray();
+
+        // Get all categories for the dropdown
         $categories = Category::all();
 
-        return view('dashboard', compact('seeds', 'categories'));
+        return view('dashboard', compact('seeds', 'categories', 'colors'));
     }
 
     /**
