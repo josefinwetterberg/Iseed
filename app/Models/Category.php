@@ -14,11 +14,6 @@ class Category extends Model
         'name'
     ];
 
-    public function seed(): HasMany
-    {
-        return $this->hasMany(Seed::class);
-    }
-
     //tror det ska vara belongsToMany?
     public function seeds()
     {
