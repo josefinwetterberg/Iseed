@@ -47,7 +47,7 @@
                         @php
                             $selectedColors = (array) request('color'); // Ensures it's an array
                         @endphp
-                    
+                     <label for="filter_category">Color:</label>
                     <select id="filter_color" name="color[]" multiple>
                         <option value="">All colors</option>
                             @foreach($colors as $color)
