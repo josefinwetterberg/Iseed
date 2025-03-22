@@ -8,8 +8,7 @@
 
             @csrf
             @method('PUT')
-            <x-form :seed="$seed" />
-
+            <x-form :seed="$seed" :categories="$categories" />
         </form>
     </div>
 </x-app-layout>

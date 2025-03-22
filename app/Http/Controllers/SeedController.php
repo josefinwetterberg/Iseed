@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Seed;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +15,9 @@ class SeedController extends Controller
     public function index()
     {
         $seeds = Seed::all();
-        return view('dashboard', ['seeds' => $seeds]);
+        $categories = Category::all();
+
+        return view('dashboard', compact('seeds', 'categories'));
     }
 
     /**
@@ -22,8 +25,8 @@ class SeedController extends Controller
      */
     public function create()
     {
-        //För att ha en create view för att skapa en ny seed.
-        return view('seeds.create');
+        $categories = Category::all();
+        return view('seeds.create', compact('categories'));
     }
 
     /**
@@ -41,6 +44,8 @@ class SeedController extends Controller
             'price_sek' => 'required|integer',
             'seed_count' => 'required|integer',
             'organic' => 'required|boolean',
+            'categories' => 'required|array',
+            'categories.*' => 'exists:categories,id',
         ]);
 
         $seed = new Seed();
@@ -55,6 +60,10 @@ class SeedController extends Controller
         $seed->organic = $request->get('organic');
         $seed->user_id = Auth::id();
         $seed->save();
+
+        if ($request->has('categories')) {
+            $seed->categories()->attach($request->categories);
+        }
 
         return redirect('/dashboard')->with('success', 'Seed added successfully!');
     }
@@ -71,11 +80,11 @@ class SeedController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    //This sends the specific seed’s data to the seeds.edit view.
-    //The view will use this data to pre-fill an edit form.
+
     public function edit(Seed $seed)
     {
-        return view('seeds.edit', ['seed' => $seed]);
+        $categories = Category::all();
+        return view('seeds.edit', compact('seed', 'categories'));
     }
 
 
@@ -94,6 +103,7 @@ class SeedController extends Controller
             'price_sek' => 'required|integer',
             'seed_count' => 'required|integer',
             'organic' => 'required|boolean',
+            'categories' => 'array',
         ]);
 
         $seed->update([
@@ -107,6 +117,12 @@ class SeedController extends Controller
             'seed_count' => $request->seed_count,
             'organic' => $request->organic,
         ]);
+
+        if ($request->has('categories')) {
+            $seed->categories()->sync($request->categories);
+        } else {
+            $seed->categories()->detach();
+        }
 
         return redirect('/dashboard')->with('success', 'Seed updated successfully!');
     }

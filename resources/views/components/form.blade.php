@@ -1,4 +1,4 @@
-@props(['seed' => null])
+@props(['seed' => null, 'categories' => []])
 
 @csrf
 <div>
@@ -42,6 +42,17 @@
     <select name="organic" id="organic">
         <option value="1" {{ old('organic', $seed?->organic) == 1 ? 'selected' : ''  }}>Yes</option>
         <option value="0" {{ old('organic', $seed?->organic) == 0 ? 'selected' : '' }}>No</option>
+    </select>
+</div>
+<div>
+    <label for="categories">Category</label>
+    <select name="categories[]" id="categories" multiple>
+        @foreach($categories as $category)
+            <option value="{{ $category->id }}" 
+                {{ in_array($category->id, old('categories', $seed?->categories->pluck('id')->toArray() ?? [])) ? 'selected' : '' }}>
+                {{ $category->name }}
+            </option>
+        @endforeach
     </select>
 </div>
 <button type="submit">Save</button>

@@ -31,15 +31,4 @@ class Seed extends Model
     {
         return $this->belongsToMany(Category::class, 'seed_category');
     }
-
-    //För att en seed ska kunna ha flera whereToSow
-    public function whereToSow()
-    {
-        return $this->belongsToMany(WhereToSow::class);
-    }
-
-    public function seasons()
-    {
-        return $this->belongsToMany(Season::class, 'seed_season')->withPivot('action');
-    }
 }

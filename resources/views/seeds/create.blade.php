@@ -15,7 +15,7 @@
                     @include('errors')
 
                     <form action="{{ route('seeds.store') }}" method="POST">
-                        <x-form />
+                        <x-form :categories="$categories" />
 
                     </form>
                 </div>

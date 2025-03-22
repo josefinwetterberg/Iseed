@@ -15,9 +15,6 @@
         <h1>Welcome to the Dashboard</h1>
         <p>This is the admin area where you manage products.</p>
 
-
-
-
         <form action="{{ route('seeds.create') }}" method="GET" class="d-inline">
             <button type="submit" class="btn btn-primary">Add New Seed</button>
         </form>
@@ -40,6 +37,7 @@
                     <th>Price (SEK)</th>
                     <th>Seed Count</th>
                     <th>Organic</th>
+                    <th>Category</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,6 +52,7 @@
                     <td>{{ $seed->price_sek }}</td>
                     <td>{{ $seed->seed_count }}</td>
                     <td>{{ $seed->organic ? 'Yes' : 'No' }}</td>
+                    <td>{{ $seed->categories->pluck('name')->join(', ') }}</td>
                     <td><a href="{{ route('seeds.edit', $seed->id) }}">Edit</a> {{-- Add Edit Button --}}</td>
                     <td>
                         <form action="{{ route('seeds.destroy', $seed) }}" method="POST">
