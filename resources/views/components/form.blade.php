@@ -1,16 +1,16 @@
 @props(['seed' => null, 'categories' => []])
 
 @csrf
-<div>
+<div class="form-group">
     <label for="name">Name</label>
     <input type="text" name="name" id="name" value="{{ old('name', $seed?->name) }}" 
         required aria-required="true">
 </div>
-<div>
+<div class="form-group">
     <label for="description">Description</label>
     <input type="text" name="description" id="description" value="{{ old('description', $seed?->description) }}">
 </div>
-<div>
+<div class="form-group">
     <label for="annuality">Annuality</label>
     <select name="annuality" id="annuality">
         <option value="annual" {{ old('annuality', $seed?->annuality) == 'annual' ? 'selected' : '' }}>Annual</option>
@@ -18,41 +18,41 @@
         <option value="biennial" {{ old('annuality', $seed?->annuality) == 'biennial' ? 'selected' : '' }}>Biennial</option>
     </select>
 </div>
-<div>
+<div class="form-group">
     <label for="height_cm">Height in centimeters</label>
     <input type="number" name="height_cm" id="height_cm" , value="{{ old('height_cm', $seed?->height_cm) }}">
 </div>
-<div>
+<div class="form-group">
     <label for="color">Color</label>
     <input type="text" name="color" id="color" value="{{ old('color', $seed?->color) }}">
 </div>
-<div>
+<div class="form-group">
     <label for="image">Image</label>
     <input type="url" name="image" id="image" value="{{ old('image', $seed?->image) }}">
 </div>
-<div>
+<div class="form-group">
     <label for="price_sek">Price</label>
     <input type="number" name="price_sek" id="price_sek" value="{{ old('price_sek', $seed?->price_sek) }}">
 </div>
-<div>
+<div class="form-group">
     <label for="seed_count">How many seeds in packet</label>
     <input type="number" name="seed_count" id="seed_count" value="{{ old('seed_count', $seed?->seed_count) }}">
 </div>
-<div>
+<div class="form-group">
     <label for="organic">Organic</label>
     <select name="organic" id="organic">
         <option value="1" {{ old('organic', $seed?->organic) == 1 ? 'selected' : ''  }}>Yes</option>
         <option value="0" {{ old('organic', $seed?->organic) == 0 ? 'selected' : '' }}>No</option>
     </select>
 </div>
-<div>
+<div class="form-group">
     <label for="categories">Category</label>
     <select name="categories[]" id="categories" multiple>
         @foreach($categories as $category)
-            <option value="{{ $category->id }}" 
-                {{ in_array($category->id, old('categories', $seed?->categories->pluck('id')->toArray() ?? [])) ? 'selected' : '' }}>
-                {{ $category->name }}
-            </option>
+        <option value="{{ $category->id }}"
+            {{ in_array($category->id, old('categories', $seed?->categories->pluck('id')->toArray() ?? [])) ? 'selected' : '' }}>
+            {{ $category->name }}
+        </option>
         @endforeach
     </select>
 </div>

@@ -1,16 +1,16 @@
 @props([
-    'name',
-    'show' => false,
-    'maxWidth' => '2xl'
+'name',
+'show' => false,
+'maxWidth' => '2xl'
 ])
 
 @php
 $maxWidth = [
-    'sm' => 'modal-sm',
-    'md' => 'modal-md',
-    'lg' => 'modal-lg',
-    'xl' => 'modal-xl',
-    '2xl' => 'modal-2xl',
+'sm' => 'modal-sm',
+'md' => 'modal-md',
+'lg' => 'modal-lg',
+'xl' => 'modal-xl',
+'2xl' => 'modal-2xl',
 ][$maxWidth];
 @endphp
 
@@ -45,8 +45,7 @@ $maxWidth = [
     x-on:keydown.shift.tab.prevent="prevFocusable().focus()"
     x-show="show"
     class="modal-container"
-    style="display: {{ $show ? 'block' : 'none' }};"
->
+    :style="{ display: show ? 'block' : 'none' }">
     <div
         x-show="show"
         class="modal-backdrop"
@@ -56,8 +55,7 @@ $maxWidth = [
         x-transition:enter-end="opacity-100"
         x-transition:leave="transition-fade-out"
         x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-    >
+        x-transition:leave-end="opacity-0">
         <div class="modal-backdrop-overlay"></div>
     </div>
 
@@ -69,8 +67,7 @@ $maxWidth = [
         x-transition:enter-end="modal-scale-100"
         x-transition:leave="transition-modal-out"
         x-transition:leave-start="modal-scale-100"
-        x-transition:leave-end="modal-scale-95"
-    >
+        x-transition:leave-end="modal-scale-95">
         {{ $slot }}
     </div>
 </div>
