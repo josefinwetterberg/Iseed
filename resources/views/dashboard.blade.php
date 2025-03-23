@@ -4,61 +4,66 @@
     </x-slot>
 
     <x-slot name="slot">
-
         @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
         @endif
 
         @include('errors')
+
+        <!-- Welcome Section -->
         <div class="dashboard-header">
-            <h1>Welcome to the Dashboard</h1>
+            <h1 id="dashboard-title">Welcome to Iseed</h1>
             <p>This is the admin area where you manage products.</p>
         </div>
 
-        <section class="filtering">
-            <h2>Filter Products</h2>
-            <form action="{{ route('dashboard') }}" method="GET">
-
-                <!-- Always visible filters -->
+        <!-- Filter Section -->
+        <section class="filtering" aria-labelledby="filter-heading">
+            <h2 id="filter-heading">Filter Products</h2>
+            <form action="{{ route('dashboard') }}" method="GET" aria-labelledby="filter-heading">
+                <!-- Basic filters -->
                 <div class="filter-row">
                     <!-- Name filter -->
                     <div class="filter-group">
-                        <label for="filter_name">Name:</label>
-                        <input type="text" id="filter_name" name="name" value="{{ request('name') }}">
+                        <label for="filter_name" id="label_filter_name">Name:</label>
+                        <input type="text" id="filter_name" name="name" value="{{ request('name') }}" aria-labelledby="label_filter_name">
                     </div>
 
                     <!-- Category filter -->
                     <div class="filter-group">
-                        <label for="filter_category">Category:</label>
-                        <select id="filter_category" name="category_id">
+                        <label for="filter_category" id="label_filter_category">Category:</label>
+                        <select id="filter_category" name="category_id" aria-labelledby="label_filter_category">
                             <option value="">All categories</option>
                             @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
-                                {{ $category->name }}
-                            </option>
+                                <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
 
                     <!-- Color filter -->
+                    @php
+                        $selectedColors = (array) request('color');
+                    @endphp
                     <div class="filter-group">
-                        <label for="filter_color">Color:</label>
-                        <select id="filter_color" name="color">
+                        <label for="filter_color" id="label_filter_color">Color:</label>
+                        <select id="filter_color" name="color[]" multiple aria-labelledby="label_filter_color" aria-describedby="color_hint">
                             <option value="">All colors</option>
                             @foreach($colors as $color)
-                            <option value="{{ $color }}" {{ request('color') == $color ? 'selected' : '' }}>
-                                {{ ucfirst($color) }}
-                            </option>
+                                <option value="{{ $color }}" {{ in_array($color, $selectedColors) ? 'selected' : '' }}>
+                                    {{ ucfirst($color) }}
+                                </option>
                             @endforeach
                         </select>
+                        <span id="color_hint" class="field-hint">Hold Ctrl or Cmd to select multiple colors</span>
                     </div>
 
                     <!-- Annuality filter -->
                     <div class="filter-group">
-                        <label for="filter_annuality">Annuality:</label>
-                        <select id="filter_annuality" name="annuality">
+                        <label for="filter_annuality" id="label_filter_annuality">Annuality:</label>
+                        <select id="filter_annuality" name="annuality" aria-labelledby="label_filter_annuality">
                             <option value="">All Types</option>
                             <option value="annual" {{ request('annuality') == 'annual' ? 'selected' : '' }}>Annual</option>
                             <option value="perennial" {{ request('annuality') == 'perennial' ? 'selected' : '' }}>Perennial</option>
@@ -67,63 +72,79 @@
                     </div>
                 </div>
 
-                <!-- More filters inside details -->
+                <!-- Expandable advanced filters -->
                 <details class="more-filters">
-                    <summary>More filters</summary>
-
+                    <summary>More Filters</summary>
                     <div class="filter-row">
-                        <!-- Height range filter -->
-                        <div class="filter-group">
-                            <label for="min_height">Height (cm):</label>
-                            <input type="number" id="min_height" name="min_height" placeholder="Min" value="{{ request('min_height') }}">
-                            <span>to</span>
-                            <input type="number" id="max_height" name="max_height" placeholder="Max" value="{{ request('max_height') }}">
-                        </div>
+                        <!-- Height range -->
+                        <fieldset class="filter-group">
+                            <legend>Height (cm):</legend>
+                            <div class="range-inputs">
+                                <label for="min_height" class="visually-hidden">Minimum height</label>
+                                <input type="number" id="min_height" name="min_height" placeholder="Min" value="{{ request('min_height') }}" min="0" aria-label="Minimum height in centimeters">
+                                <span aria-hidden="true">to</span>
+                                <label for="max_height" class="visually-hidden">Maximum height</label>
+                                <input type="number" id="max_height" name="max_height" placeholder="Max" value="{{ request('max_height') }}" min="0" aria-label="Maximum height in centimeters">
+                            </div>
+                        </fieldset>
 
-                        <!-- Price range filter -->
-                        <div class="filter-group">
-                            <label for="min_price">Price (SEK):</label>
-                            <input type="number" id="min_price" name="min_price" placeholder="Min" value="{{ request('min_price') }}">
-                            <span>to</span>
-                            <input type="number" id="max_price" name="max_price" placeholder="Max" value="{{ request('max_price') }}">
-                        </div>
+                        <!-- Price range -->
+                        <fieldset class="filter-group">
+                            <legend>Price (SEK):</legend>
+                            <div class="range-inputs">
+                                <label for="min_price" class="visually-hidden">Minimum price</label>
+                                <input type="number" id="min_price" name="min_price" placeholder="Min" value="{{ request('min_price') }}" min="0" step="0.01" aria-label="Minimum price in SEK">
+                                <span aria-hidden="true">to</span>
+                                <label for="max_price" class="visually-hidden">Maximum price</label>
+                                <input type="number" id="max_price" name="max_price" placeholder="Max" value="{{ request('max_price') }}" min="0" step="0.01" aria-label="Maximum price in SEK">
+                            </div>
+                        </fieldset>
 
-                        <!-- Organic filter -->
+                        <!-- Organic -->
                         <div class="filter-group">
-                            <label for="filter_organic">Organic:</label>
-                            <select id="filter_organic" name="organic">
+                            <label for="filter_organic" id="label_filter_organic">Organic:</label>
+                            <select id="filter_organic" name="organic" aria-labelledby="label_filter_organic">
                                 <option value="">All</option>
                                 <option value="1" {{ request('organic') === '1' ? 'selected' : '' }}>Yes</option>
                                 <option value="0" {{ request('organic') === '0' ? 'selected' : '' }}>No</option>
                             </select>
                         </div>
 
-                        <!-- Seed count filter -->
-                        <div class="filter-group">
-                            <label for="min_seed_count">Seed Count:</label>
-                            <input type="number" id="min_seed_count" name="min_seed_count" placeholder="Min" value="{{ request('min_seed_count') }}">
-                            <span>to</span>
-                            <input type="number" id="max_seed_count" name="max_seed_count" placeholder="Max" value="{{ request('max_seed_count') }}">
-                        </div>
+                        <!-- Seed count -->
+                        <fieldset class="filter-group">
+                            <legend>Seed Count:</legend>
+                            <div class="range-inputs">
+                                <label for="min_seed_count" class="visually-hidden">Minimum seed count</label>
+                                <input type="number" id="min_seed_count" name="min_seed_count" placeholder="Min" value="{{ request('min_seed_count') }}" min="0" aria-label="Minimum seed count">
+                                <span aria-hidden="true">to</span>
+                                <label for="max_seed_count" class="visually-hidden">Maximum seed count</label>
+                                <input type="number" id="max_seed_count" name="max_seed_count" placeholder="Max" value="{{ request('max_seed_count') }}" min="0" aria-label="Maximum seed count">
+                            </div>
+                        </fieldset>
                     </div>
                 </details>
 
+                <!-- Filter buttons -->
                 <div class="filter-actions">
                     <button type="submit" class="filter-button">Apply Filters</button>
-                    <a href="{{ route('dashboard') }}" class="reset-button">Reset Filters</a>
+                    <a href="{{ route('dashboard') }}" class="reset-button" role="button">Reset Filters</a>
                 </div>
             </form>
-
         </section>
 
-        <div class="table-container">
+        <!-- Table section -->
+        <section class="existing-products" aria-labelledby="products-heading">
             <div class="table-header">
-                <h2>Existing Products</h2>
+                <h2 id="products-heading">Existing Products</h2>
                 <form action="{{ route('seeds.create') }}" method="GET">
-                    <button type="submit" class="btn btn-primary">Add New Seed</button>
+                    <button type="submit" class="btn btn-primary" aria-label="Add New Seed">
+                        <span aria-hidden="true">+</span> Add New Seed
+                    </button>
                 </form>
             </div>
-            <table>
+
+            <table aria-labelledby="products-heading">
+                <caption class="visually-hidden">List of seed products with their details</caption>
                 <thead>
                     <tr>
                         <th>Image</th>
@@ -141,7 +162,7 @@
                 <tbody>
                     @foreach($seeds as $seed)
                     <tr>
-                        <td><img src="{{ $seed->image }}" alt="{{ $seed->name }}" width="50" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;"></td>
+                        <td><img src="{{ $seed->image }}" alt="{{ 'Photography of ' . strtolower($seed->name) }}" width="50" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;"></td>
                         <td>{{ $seed->name }}</td>
                         <td>{{ $seed->description }}</td>
                         <td>{{ $seed->annuality }}</td>
@@ -151,7 +172,7 @@
                         <td>{{ $seed->seed_count }}</td>
                         <td>{{ $seed->organic ? 'Yes' : 'No' }}</td>
                         <td>{{ $seed->categories->pluck('name')->join(', ') }}</td>
-                        <td><a href="{{ route('seeds.edit', $seed->id) }}">Edit</a> {{-- Add Edit Button --}}</td>
+                        <td><a href="{{ route('seeds.edit', $seed->id) }}">Edit</a></td>
                         <td>
                             <form action="{{ route('seeds.destroy', $seed) }}" method="POST">
                                 @csrf
@@ -163,6 +184,7 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
+        </section>
+
     </x-slot>
 </x-app-layout>
