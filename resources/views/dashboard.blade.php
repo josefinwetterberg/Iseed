@@ -4,11 +4,6 @@
     </x-slot>
 
     <x-slot name="slot">
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
 
         @include('errors')
 
@@ -36,28 +31,24 @@
                         <select id="filter_category" name="category_id" aria-labelledby="label_filter_category">
                             <option value="">All categories</option>
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
-                                    {{ $category->name }}
-                                </option>
+                            <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
                             @endforeach
                         </select>
                     </div>
 
                     <!-- Color filter -->
-                    @php
-                        $selectedColors = (array) request('color');
-                    @endphp
                     <div class="filter-group">
                         <label for="filter_color" id="label_filter_color">Color:</label>
-                        <select id="filter_color" name="color[]" multiple aria-labelledby="label_filter_color" aria-describedby="color_hint">
+                        <select id="filter_color" name="color" aria-labelledby="label_filter_color">
                             <option value="">All colors</option>
                             @foreach($colors as $color)
-                                <option value="{{ $color }}" {{ in_array($color, $selectedColors) ? 'selected' : '' }}>
-                                    {{ ucfirst($color) }}
-                                </option>
+                            <option value="{{ $color }}" {{ request('color') == $color ? 'selected' : '' }}>
+                                {{ ucfirst($color) }}
+                            </option>
                             @endforeach
                         </select>
-                        <span id="color_hint" class="field-hint">Hold Ctrl or Cmd to select multiple colors</span>
                     </div>
 
                     <!-- Annuality filter -->
@@ -131,6 +122,12 @@
                 </div>
             </form>
         </section>
+
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
 
         <!-- Table section -->
         <section class="existing-products" aria-labelledby="products-heading">

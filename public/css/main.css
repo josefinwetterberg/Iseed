@@ -349,6 +349,10 @@ td form button:hover {
     border-bottom: 2px solid var(--platinum);
 }
 
+.visually-hidden {
+    display: none !important;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .filtering {
