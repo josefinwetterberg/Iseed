@@ -30,8 +30,8 @@ class SeedController extends Controller
         }
 
         // Filter by color
-        if ($request->has('color') && is_array($request->color) && !empty($request->color)) {
-            $query->whereIn('color', $request->color);
+        if ($request->filled('color')) {
+            $query->where('color', $request->color);
         }
 
         // Filter by annuality
