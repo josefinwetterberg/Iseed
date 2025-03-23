@@ -4,7 +4,7 @@
 <div>
     <label for="name">Name</label>
     <input type="text" name="name" id="name" value="{{ old('name', $seed?->name) }}" 
-        required aria-required="true" aria-describedby="name-error">
+        required aria-required="true">
 </div>
 <div>
     <label for="description">Description</label>
