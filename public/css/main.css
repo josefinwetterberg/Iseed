@@ -6,9 +6,9 @@
 
 :root {
     --jet: #353535ff;
-    --caribbean-current: #3c6e71ff;
+    --caribbean-current: rgb(30, 78, 81);
     --white: #ffffffff;
-    --platinum: rgb(155, 171, 167);
+    --platinum: rgb(192, 205, 201);
     --indigo-dye: #284b63ff;
 }
 
@@ -33,12 +33,30 @@ section {
     width: 90%;
 }
 
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    justify-content: start;
+}
+
+footer {
+    background-color: var(--caribbean-current);
+    color: var(--white);
+    text-align: center;
+    padding: 4rem;
+}
+
 /* Welcome page */
 .welcome-nav {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
-    padding: 1rem;
+    padding: 4rem;
 }
 
 .welcome-main {
@@ -283,7 +301,7 @@ tr:hover {
 
 /* Action Links */
 td a {
-    color: #007bff;
+    color: #052c56;
     text-decoration: none;
     font-weight: bold;
 }
