@@ -1,7 +1,4 @@
-
-
-/*
-.main-nav {
+/* .main-nav {
     background: white;
     border-bottom: 1px solid #e5e7eb;
 }
@@ -281,10 +278,10 @@
     .dropdown-link:focus {
         background-color: #374151;
     }
-}
+} */
 
 /* Nav Link Styles */
-/*.nav-link {
+/* .nav-link {
     display: inline-flex;
     align-items: center;
     padding: 0.25rem 0.5rem;
@@ -304,10 +301,10 @@
 .nav-link-active {
     color: #111827;
     border-bottom-color: #6366f1;
-}
+} */
 
 /* Modal Styles */
-/*.modal-open {
+/* .modal-open {
     overflow: hidden;
 }
 
@@ -339,11 +336,11 @@
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     transform: translate3d(0, 0, 0);
     width: 100%;
-}*/
+} */
 
 /* Modal Sizes */
-/*
-@media (min-width: 640px) {
+
+/* @media (min-width: 640px) {
     .modal-container {
         padding: 1.5rem 0;
     }
@@ -368,10 +365,10 @@
     .modal-2xl {
         max-width: 42rem;
     }
-}
+} */
 
 /* Modal Transitions */
-/*.transition-fade-in {
+/* .transition-fade-in {
     transition: opacity 0.3s ease-out;
 }
 
@@ -592,4 +589,4 @@
         background-color: #3730a3;
         border-left-color: #818cf8;
     }
-}
+} */

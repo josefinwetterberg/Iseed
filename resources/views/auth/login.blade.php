@@ -16,9 +16,9 @@
         <div class="form-group">
             <x-input-label class="form-label" for="password" :value="__('Password')" />
             <x-text-input id="password" class="form-input"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+                type="password"
+                name="password"
+                required autocomplete="current-password" />
             <x-input-error :messages="$errors->get('password')" class="form-error" />
         </div>
 
@@ -32,9 +32,9 @@
 
         <div class="flex-end">
             @if (Route::has('password.request'))
-                <a class="link" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
+            <a class="link" href="{{ route('password.request') }}">
+                {{ __('Forgot your password?') }}
+            </a>
             @endif
 
             <x-primary-button class="button-primary">
