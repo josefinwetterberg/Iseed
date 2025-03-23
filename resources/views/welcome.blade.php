@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel</title>
+        <title>Iseed</title>
         <link rel="stylesheet" href="/css/main.css">
     </head>
     <body>
@@ -24,9 +24,10 @@
         </header>
 
         <main class="welcome-main">
-            <div class="logo">
-                <h1>Laravel</h1>
-            </div>
+                <h1 class="logo">Iseed</h1>
         </main>
+        <footer>
+            <p>&copy; Iseed 2025</p>
+        </footer>
     </body>
 </html>
