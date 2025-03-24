@@ -3,7 +3,7 @@
 @csrf
 <div class="filter-row">
     <div class="filter-group">
-        <label for="name">Name</label>
+        <label for="name">Name <span class="visually-hidden">(required)</span></label>
         <input type="text" name="name" id="name" value="{{ old('name', $seed?->name) }}"
             required aria-required="true" class="filter-group input">
     </div>
@@ -31,7 +31,7 @@
         <input type="text" name="color" id="color" value="{{ old('color', $seed?->color) }}" class="filter-group input">
     </div>
     <div class="filter-group">
-        <label for="image">Image</label>
+        <label for="image">Image URL</label>
         <input type="url" name="image" id="image" value="{{ old('image', $seed?->image) }}" class="filter-group input">
     </div>
 </div>
@@ -57,7 +57,7 @@
 <div class="filter-row">
     <div class="filter-group">
         <label for="categories">Category</label>
-        <select name="categories[]" id="categories" multiple class="filter-group select">
+        <select name="categories[]" id="categories" multiple class="filter-group select" aria-label="Categories">
             @foreach($categories as $category)
             <option value="{{ $category->id }}"
                 {{ in_array($category->id, old('categories', $seed?->categories->pluck('id')->toArray() ?? [])) ? 'selected' : '' }}>
@@ -65,10 +65,11 @@
             </option>
             @endforeach
         </select>
+        <small id="categoryHelp" class="visually-hidden">Hold Ctrl (Windows) or Command (Mac) to select multiple categories.</small>
     </div>
 </div>
 
 <div class="filter-actions">
     <button type="submit" class="filter-button">Save</button>
-    <a href="{{ route('dashboard') }}" class="reset-button">Cancel</a>
+    <a href="{{ route('dashboard') }}" class="reset-button" role="button">Cancel</a>
 </div>
