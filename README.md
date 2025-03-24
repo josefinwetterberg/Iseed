@@ -6,33 +6,33 @@ This project is a Laravel-based web application designed to simulate a web shop 
 
 ## Features
 
-### CRUD (Create, Read, Update, Delete) operations for products.
+CRUD (Create, Read, Update, Delete) operations for products.
 
-### Filtering functionality based on category, color, price range, etc.
+Filtering functionality based on category, color, price range, etc.
 
 ## Accessibility (a11y) Considerations
 
 To ensure an inclusive and accessible user experience, the following best practices have been implemented:
 
-### Semantic HTML: Used to enhance screen reader navigation.
+Semantic HTML: Used to enhance screen reader navigation.
 
-### Form Accessibility: Properly labeled forms with clear instructions and accessible error messages.
+Form Accessibility: Properly labeled forms with clear instructions and accessible error messages.
 
-### Color Contrast: Ensured sufficient contrast between text and background.
+Color Contrast: Ensured sufficient contrast between text and background.
 
-### Color Independence: Avoided relying solely on color to convey meaning (e.g., error states).
+Color Independence: Avoided relying solely on color to convey meaning (e.g., error states).
 
-### Legible Typography: Used clear, resizable fonts without breaking the layout.
+Legible Typography: Used clear, resizable fonts without breaking the layout.
 
 ## Project Management
 
-### Version Control: Managed using Git and GitHub.
+Version Control: Managed using Git and GitHub.
 
-### Collaboration: Utilize Discord for team communication.
+Collaboration: Utilize Discord for team communication.
 
-### Development Workflow: Gitflow methodology (feature branches, pull requests, issue tracking).
+Development Workflow: Gitflow methodology (feature branches, pull requests, issue tracking).
 
-### Issue Tracking: Tasks are managed using GitHub Issues.
+Issue Tracking: Tasks are managed using GitHub Issues.
 
 ## License
 
